@@ -3,4 +3,4 @@
 set -e
 
 mkdir -p build/
-gcc src/*.c -o build/main
+gcc -I include/ src/*.c -o build/main
