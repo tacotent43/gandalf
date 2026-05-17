@@ -3,4 +3,4 @@
 set -e
 
 mkdir -p build/
-gcc -I include/ src/*.c -o build/main
+gcc -std=gnu23 -I include/ src/*.c -o build/main
