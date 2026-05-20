@@ -1,22 +1,27 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
-// #include <sys/
 
-// _start: 
-//   mov sp 0x120
-//   call main
+#include <dwarf/elf.h>
+
 
 int run_child(char *exe) {
   printf("Starting %s\n", exe);
+  execl(exe, (char *) NULL);
 }
-
 
 int main(int argc, char **argv) {
   if (argc != 2) {
     printf("Usage: gandalf <executable>\n");
     return 1;
   }
+  char *child_exe = argv[1];
+  
+  FILE *file = fopen(child_exe, "r");
+  if (!file) {
+    exit(1);
+  }
+  parse_elf(file);
   
   pid_t child = fork();
 
@@ -28,6 +33,5 @@ int main(int argc, char **argv) {
     run_child(argv[1]);
   } else {
     printf("Parent process\n");
-
   }
 }
