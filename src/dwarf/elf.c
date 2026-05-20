@@ -83,6 +83,6 @@ void parse_elf(FILE *file) {
   printf("Set file cursor to: %"PRIu64"\n", header.e_shoff);
   
   Elf64_Shdr section_header;
-  fread(&header, sizeof(section_header), 1, file);
+  fread(&section_header, sizeof(section_header), 1, file);
   print_elf64_section_header(&section_header);
 }
